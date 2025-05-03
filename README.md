@@ -1,66 +1,129 @@
-<p align="center">
-  <img src="https://raw.githubusercontent.com/th3unkn0n/OSI.IG/master/.lib/20191103_233944.jpg" width="300" height="120">
-</p>
-<p align="center">
-</p>
-<p align="center"><img src="https://img.shields.io/badge/Version-2.0-brightgreen"></p>
-<p align="center">
-  <a href="https://github.com/th3unkn0n">
-    <img src="https://img.shields.io/github/followers/th3unkn0n?label=Follow&style=social">
-  </a>
-  <a href="https://github.com/th3unkn0n/osi.ig/stargazers">
-    <img src="https://img.shields.io/github/stars/th3unkn0n/osi.ig?style=social">
-  </a>
-</p>
-<p align="center">
-  Open Source Information Instagram
-</p>
+OSI.IG - Open Source Information Instagram Tool
+<p align="center"> <img src="https://raw.githubusercontent.com/th3unkn0n/OSI.IG/master/.lib/20191103_233944.jpg" width="300" height="120"> </p> <p align="center"> <img src="https://img.shields.io/badge/Version-3.0-brightgreen"> <a href="https://github.com/th3unkn0n"> <img src="https://img.shields.io/github/followers/th3unkn0n?label=Follow&style=social"> </a> <a href="https://github.com/th3unkn0n/osi.ig/stargazers"> <img src="https://img.shields.io/github/stars/th3unkn0n/osi.ig?style=social"> </a> </p> <p align="center"> Open Source Information Instagram - Enhanced OSINT Tool </p>
+Features
 
----
+OSI.IG is a powerful Instagram OSINT (Open Source Intelligence) tool that retrieves comprehensive information from Instagram profiles without requiring login credentials.
+Information Collected:
+📊 Profile Information
 
-so recently ig started sending html response insted of json to "unknown" requests. 
+    User ID, username, full name
+    Followers and following counts
+    Post counts (images and videos)
+    Profile image URL
+    Bio information and external URL
+    Account type (business, personal)
+    Verification status
+    Business category and other profile metadata
 
-i REALLY wanted this to work without login since i don't use ig anymore, tried few ways i knew to get it working without login but it didn't work :/
+📧 Contact Information
 
-<p align="center"><img src="https://c.tenor.com/ujlv7g3-a7QAAAAC/pepo-sad-pepe.gif" width="100" height="100" /></p>
+    Emails mentioned in profile or posts
+    Email validation (syntax, domain, and mailbox verification)
 
-anyways since lot of people are using this i will add a temporary login to get this working asap
+🔍 Content Analysis
 
----
+    Most used hashtags
+    Most mentioned accounts
+    Post information and metadata
+    Media URLs and types
+    Captions and engagement metrics
+    Location data (when available)
 
-* The Instagram OSINT Tool gets a range of information from an Instagram account that you normally wouldn't be able to get
-from just looking at their profile
+🛠️ Advanced Features
 
-* The information includes:
+    Proxy support (including TOR)
+    Output results to JSON
+    Rate limit protection
+    Comprehensive error handling
 
-* [ profile ] : user id, followers / following, number of uploads, profile img URL, business enum, external URL, joined Recently, etc
+Installation
+Option 1: Standard Installation
 
-* [ tags & mentions ] : most used hashtags and mentioned accounts
+bash
 
-* [ email ] : if any email is used anywhere it'll be displayed
+# Install required packages
+$ apt-get install python3 python3-pip git
 
-* [ posts ] : accessability caption, location, timestamp, caption, picture url, etc
-  * ( yet not working correctly with posts instagram marks as 'sensitive cotent' )  
+# Clone the repository
+$ git clone https://github.com/th3unkn0n/osi.ig.git && cd osi.ig
 
----
+# Install dependencies
+$ pip3 install -r requirements.txt
 
-## • How To Install
+Option 2: Docker Installation
 
-`$ pkg install -y git`
+bash
 
-`$ git clone https://github.com/th3unkn0n/osi.ig.git && cd osi.ig`
+# Build the Docker image
+$ docker build -t osi-ig .
 
-`$ python3 -m pip install -r requirements.txt`
+# Run the container
+$ docker run -it osi-ig
 
-## • Usage
+Usage
+Basic Commands
 
-`$ python3 main.py -u username`
+bash
 
-`$ python3 main.py -h`
+# Get profile information
+$ python3 main.py -u <username>
 
-`-p, --post images info highlight`
+# Get profile and post information
+$ python3 main.py -u <username> -p
 
+# Use TOR proxy for requests
+$ python3 main.py -u <username> --proxy
 
-## • Update
+# Save results to JSON file
+$ python3 main.py -u <username> -p -o results.json
 
-`$ git pull`
+# Validate an email address
+$ python3 main.py -e example@domain.com
+
+# Enable verbose output
+$ python3 main.py -u <username> -v
+
+# Show help
+$ python3 main.py -h
+
+Advanced Configuration
+
+You can create a config.json file to customize settings:
+
+json
+
+{
+  "proxy": {
+    "enabled": true,
+    "type": "socks5",
+    "host": "127.0.0.1",
+    "port": "9050"
+  },
+  "output": {
+    "format": "json",
+    "path": "./output/"
+  }
+}
+
+Then use it with:
+
+bash
+
+$ python3 main.py -u <username> --config config.json
+
+Limitations
+
+    Instagram's API changes frequently, which may affect tool functionality
+    Some information may not be available for private accounts
+    Rate limiting may occur with frequent requests
+    This tool is designed for educational and research purposes only
+
+Legal Disclaimer
+
+This tool is provided for educational and research purposes only. Usage of this tool for attacking targets without prior mutual consent is illegal. It is the end user's responsibility to obey all applicable local, state, and federal laws. Developers assume no liability and are not responsible for any misuse or damage caused by this program.
+Contribution
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
